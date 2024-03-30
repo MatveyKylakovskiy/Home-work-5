@@ -22,4 +22,15 @@ for (var i = 0; i < str1.Length - 1; i++)
 Console.WriteLine(str1);
 */
 
+//Second task
+
+var s1 = "Welcome";
+var s2 = "to";
+var s3 = "the";
+var s4 = "TMS";
+var s5 = "lesons";
+
+Console.WriteLine(string.Concat(s1, " " , s2, " " , s3," " , s4, " " , s5));
+
+
 

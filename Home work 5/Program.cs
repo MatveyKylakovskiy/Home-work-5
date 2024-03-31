@@ -151,34 +151,43 @@ void GetReplace(string[] array)
 
 void GetSmallLeters(string[] array)
 {
-    int counter = GetSize(array);
-    char[] leters = new char[counter];
+    int counter1 = GetSize(array);
+    char[] leters = new char[counter1];
 
+    var counter2 = 0;
 
-    foreach (char s in leters)
+    foreach (string s in array)
     {
-        Console.WriteLine(s);
+        for (var i = 0; i < array.Length - 1; i++)
+        {
+            if (char.IsLetter(s[i]))
+            {
+                leters[counter2] = s[i];
+                counter2++;
+
+            }
+        }
     }
+    Console.WriteLine(string.Join(" , ", leters));
 
 
 
 
-
-        int GetSize (string[] array)
+    int GetSize (string[] array)
     {
-        var counter = 0;
+        var counter1 = 0;
 
         foreach (string s in array)
         {
-            for (var i = 0; i < s.Length - 1; i++)
+            for (var i = 0; i < array.Length; i++)
             {
                 if (char.IsLetter(s[i]))
                 {
-                    counter++;
+                    counter1++;
 
                 }
             }
         }
-        return counter;
+        return counter1;
     }
 }

@@ -106,20 +106,33 @@ Console.WriteLine(str);
 вход программы строку.*/
 
 
+using System.Diagnostics.Metrics;
 using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 
 Console.WriteLine("Enter the document number in the format: xxxx-yyy-xxxx-yyy-xyxy, where x is a number\nand y is a letter.");
 
-var numberDoc = "1478-dgg-4947-ddf-4k6j";
+var numberDoc = "3555-Dgg-4947-Abc-1a2b";
 Console.WriteLine(numberDoc);
 
 string[] elements = numberDoc.Split(new char[] { '-' });
 
+StringBuilder[] sb = new StringBuilder[elements.Length];
+for (var i = 0; i < elements.Length; i++)
+{
+    sb[i] = new StringBuilder(elements[i]);
+}
 
 //GetFirstDigit(elements);
 //GetReplace(elements);
 GetSmallLeters(elements);
+GetUpperLeters(sb);
+IsContains(numberDoc);
+GetStartIndex(elements);
+GetEndIndex(elements);
+
+
+
 
 
 
@@ -152,7 +165,7 @@ void GetReplace(string[] array)
 
 void GetSmallLeters(string[] array)
 {
-    int counter1 = GetSize(array);
+    int counter1 = GetSizeString(array);
     char[] leters = new char[counter1];
 
     var counter2 = 0;
@@ -169,27 +182,131 @@ void GetSmallLeters(string[] array)
             }
         }
     }
+    
+    for (var i = 0; i <  leters.Length; i++)
+    {
+        leters[i] = char.ToLower(leters[i]);
+    }
+
     Console.WriteLine(string.Format("{0}{1}{2}/{3}{4}{5}/{6}/{7}", leters[0], leters[1], leters[2], leters[3], leters[4],
                                                                             leters[5], leters[6], leters[7], leters[7]));
+}
 
 
 
+void GetUpperLeters(StringBuilder[] array)
+{
 
-    int GetSize (string[] array)
+    int counter1 = GetSizeBuilder(array);
+    char[] leters = new char[counter1];
+
+    var counter2 = 0;
+
+    foreach (StringBuilder s in array)
     {
-        var counter1 = 0;
-
-        foreach (string s in array)
+        for (var i = 0; i < s.Length; i++)
         {
-            for (var i = 0; i < s.Length; i++)
+            if (char.IsLetter(s[i]))
             {
-                if (char.IsLetter(s[i]))
-                {
-                    counter1++;
+                leters[counter2] = s[i];
+                counter2++;
 
-                }
             }
         }
-        return counter1;
     }
+
+    for (var i = 0; i < leters.Length; i++)
+    {
+        leters[i] = char.ToUpper(leters[i]);
+    }
+
+    Console.WriteLine(string.Format("{0}{1}{2}/{3}{4}{5}/{6}/{7}", leters[0], leters[1], leters[2], leters[3], leters[4],
+                                                                            leters[5], leters[6], leters[7], leters[7]));
+}
+
+
+void IsContains(string numberDoc)
+{
+    var str = "abc";
+    
+    if (numberDoc.Contains(str, StringComparison.CurrentCultureIgnoreCase))
+    {
+        Console.WriteLine("The string contains \"abc\"");
+    }
+    
+    else
+    {
+        Console.WriteLine("The string does not contains \"abc\"");
+    }
+}
+
+void GetStartIndex(string[] array)
+{
+    var check = "555";
+    string srt = array[0];
+
+    if (srt.StartsWith(check))
+    {
+        Console.WriteLine($"The line starts with \"{check}\"");
+    }
+
+    else
+    {
+        Console.WriteLine($"The line does not start with \"{check}\"");
+    }
+}
+
+/*Проверить заканчивается ли номер документа на
+последовательность 1a2b.*/
+void GetEndIndex(string[] array)
+{
+    var check = "1a2b";
+    string srt = array[^1];
+
+    if (srt.EndsWith(check))
+    {
+        Console.WriteLine($"The line ends with \"{check}\"");
+    }
+
+    else
+    {
+        Console.WriteLine($"The line does not ends with \"{check}\"");
+    }
+}
+
+int GetSizeBuilder(StringBuilder[] array)
+{
+    var counter = 0;
+
+    foreach (StringBuilder s in array)
+    {
+        for (var i = 0; i < s.Length; i++)
+        {
+            if (char.IsLetter(s[i]))
+            {
+                counter++;
+
+            }
+        }
+    }
+    return counter;
+}
+
+
+int GetSizeString(string[] array)
+{
+    var counter = 0;
+
+    foreach (string s in array)
+    {
+        for (var i = 0; i < s.Length; i++)
+        {
+            if (char.IsLetter(s[i]))
+            {
+                counter++;
+
+            }
+        }
+    }
+    return counter;
 }

@@ -112,6 +112,7 @@ using static System.Net.Mime.MediaTypeNames;
 Console.WriteLine("Enter the document number in the format: xxxx-yyy-xxxx-yyy-xyxy, where x is a number\nand y is a letter.");
 
 var numberDoc = "1478-dgg-4947-ddf-4k6j";
+Console.WriteLine(numberDoc);
 
 string[] elements = numberDoc.Split(new char[] { '-' });
 
@@ -158,7 +159,7 @@ void GetSmallLeters(string[] array)
 
     foreach (string s in array)
     {
-        for (var i = 0; i < array.Length - 1; i++)
+        for (var i = 0; i < s.Length; i++)
         {
             if (char.IsLetter(s[i]))
             {
@@ -168,7 +169,8 @@ void GetSmallLeters(string[] array)
             }
         }
     }
-    Console.WriteLine(string.Join(" , ", leters));
+    Console.WriteLine(string.Format("{0}{1}{2}/{3}{4}{5}/{6}/{7}", leters[0], leters[1], leters[2], leters[3], leters[4],
+                                                                            leters[5], leters[6], leters[7], leters[7]));
 
 
 
@@ -179,7 +181,7 @@ void GetSmallLeters(string[] array)
 
         foreach (string s in array)
         {
-            for (var i = 0; i < array.Length; i++)
+            for (var i = 0; i < s.Length; i++)
             {
                 if (char.IsLetter(s[i]))
                 {

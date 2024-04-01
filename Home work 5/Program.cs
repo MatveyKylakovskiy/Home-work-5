@@ -106,30 +106,78 @@ Console.WriteLine(str);
 вход программы строку.*/
 
 
-using System.Diagnostics.Metrics;
+
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 Console.WriteLine("Enter the document number in the format: xxxx-yyy-xxxx-yyy-xyxy, where x is a number\nand y is a letter.");
 
-var numberDoc = "3555-Dgg-4947-Abc-1a2b";
-Console.WriteLine(numberDoc);
+var numberDoc = Console.ReadLine();
+Console.WriteLine("\n" + numberDoc);
 
 string[] elements = numberDoc.Split(new char[] { '-' });
 
 StringBuilder[] sb = new StringBuilder[elements.Length];
+
 for (var i = 0; i < elements.Length; i++)
 {
     sb[i] = new StringBuilder(elements[i]);
 }
 
+Console.WriteLine("Select the method by number:\n1 GetFirstDigit\n2 GetReplace\n3 GetSmallLeters\n4 GetUpperLeters\n5 IsContains\n6 GetStartIndex\n7 GetEndIndex");
+
+
+
+while (true)
+{
+    var button = Console.ReadLine();
+
+    if (button == "exit")
+    {   
+        break;
+    }
+
+    switch (button)
+    {
+        case "1":
+            GetFirstDigit(elements);
+            break;
+
+        case "2":
+            Replacer(elements);
+            break;
+
+        case "3":
+            GetSmallLeters(elements);
+            break;
+
+        case "4":
+            GetUpperLeters(sb);
+            break;
+
+        case "5":
+            IsContains(numberDoc);
+            break;
+
+        case "6":
+            GetStartIndex(elements);
+            break;
+
+        case "7":
+            GetEndIndex(elements);
+            break;
+
+        default:
+            Console.WriteLine("Unknown method. Try again.");
+            break;
+    }
+}
 //GetFirstDigit(elements);
-//GetReplace(elements);
-GetSmallLeters(elements);
-GetUpperLeters(sb);
-IsContains(numberDoc);
-GetStartIndex(elements);
-GetEndIndex(elements);
+//Replacer(elements);
+//GetSmallLeters(elements);
+//GetUpperLeters(sb);
+//IsContains(numberDoc);
+//GetStartIndex(elements);
+//GetEndIndex(elements);
 
 
 
@@ -143,23 +191,30 @@ void GetFirstDigit(string[] array)
 }
 
 
-void GetReplace(string[] array)
+void Replacer(string[] array)
 {
-    
+    StringBuilder[] tmp = new StringBuilder[array.Length];
+    var counter = 0;
+
     foreach(string s in array)
     {
         var sb = new StringBuilder(s);
-
+        
         if (sb.Length == 3)
         {
             sb.Replace(sb[0], '*');
             sb.Replace(sb[1], '*');
             sb.Replace(sb[2], '*');
+
         }
-        Console.Write(sb.ToString() + "-");
+
+        tmp[counter] = sb;
+        counter++;
+        
 
     }
-    
+
+    Console.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}", tmp[0], tmp[1], tmp[2], tmp[3], tmp[4]));
 
 }
 
